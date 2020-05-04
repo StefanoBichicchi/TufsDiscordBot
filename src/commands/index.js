@@ -1,5 +1,9 @@
-import help from "./help";
+const help = require('./help');
+const DiceRoller = require('./diceroller');
+const InitTracker = require('./initTracker');
 
 module.exports = {
-	help
+	help,
+	DiceRoller,
+	InitTracker
 };

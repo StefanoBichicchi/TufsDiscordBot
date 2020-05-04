@@ -1,16 +1,17 @@
-"use strict";
+'use strict';
 
-import { Client, Collection } from "discord.js";
-import Commands from "./src/commands";
-import Dotenv from "dotenv";
+const { Client, Collection } = require('discord.js');
+const Commands = require('./src/commands');
+const DotEnv = require('dotenv');
+const BotConfig = require ('./config.json');
 
-Dotenv.config(); 
+DotEnv.config();
 
 const client = new Client;
 client.commands = new Collection();
 
-client.on("ready", () => {
-	console.info("Bot avviato: Tufs è pronto!");
+client.on('ready', () => {
+	console.info('Bot avviato: Tufs è pronto!');
 	console.info(`Loggato come ${client.user.tag}!`);
 });
 
@@ -18,21 +19,32 @@ Object.keys(Commands).map(key => {
 	client.commands.set(Commands[key].name, Commands[key]);
 });
 
-client.on("message", msg => {
+process.env.botPrefix = BotConfig.prefix;
+
+client.on('message', msg => {
+
+	if(msg.author.bot) return;
 
 	// GESTORE COMANDI //
-	if (msg.content.trim().startsWith("&")) {
+	if (msg.content.trim().startsWith(process.env.botPrefix)) {
 		const args = msg.content.split(/ +/);
-		const command = args.shift().toLowerCase();
+		const command = args.shift().toLowerCase().slice(1);
 		console.info(`Called command: ${command}`);
 
-		if (!client.commands.has(command)) return;
+		// console.log(client.commands.has(command));
+		if (!client.commands.has(command)) {
+			msg.reply('Non so cosa voglia dire');
+			return;
+		}
+
+		console.dir(args);
 
 		try {
 			client.commands.get(command).execute(msg, args);
-		} catch (error) {
-			console.error("Error:", error);
-			msg.reply("Ops!");
+		}
+		catch (error) {
+			console.error('Error:', error);
+			msg.reply('Ops!');
 		}
 
 		return;
@@ -40,4 +52,4 @@ client.on("message", msg => {
 });
 
 client.login(process.env.DISCORD_TOKEN)
-	.catch((err) => {console.error("Fatal error:", err);});
+	.catch((err) => {console.error('Fatal error:', err);});

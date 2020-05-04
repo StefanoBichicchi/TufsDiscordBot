@@ -1,13 +1,13 @@
-import DiceRoller from "rpg-dice-roller";
+const { DiceRoller } = require('rpg-dice-roller/lib/umd/bundle');
 
 module.exports = {
-	name: "tira",
-	description: "Tira un dado",
+	name: 'tira',
+	description: 'Tira un dado',
 	execute: (msg, args) => {
 		const Roller = new DiceRoller();
-		let dice = args.join(" ");
-		let response = Roller.roll(dice);
+		const dice = args.join(' ');
+		const response = Roller.roll(dice);
 
-		msg.reply(response);
+		msg.reply(response.output);
 	},
 };
