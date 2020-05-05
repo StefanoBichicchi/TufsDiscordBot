@@ -1,7 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 
-const allCommands = require('../../src/commands');
-
 module.exports = {
 	name: 'aiuto',
 	description: 'Visualizza la lista dei comandi',
