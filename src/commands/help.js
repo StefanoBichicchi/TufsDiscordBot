@@ -17,6 +17,7 @@ module.exports = {
 				{ name: 'tira', value: 'Tira un dado', inline: true },
 				{ name: 'iniziativa', value: 'Crea una tabella iniziativa per gli scontri', inline: true},
 				{ name: 'lutmeme', value: 'Invia un meme de L\'Ultima Torcia!', inline: true},
+				{ name: 'dndmeme', value: 'Invia un meme di Dungeons&Dragons', inline: true},
 			)
 			.setTimestamp()
 			.setFooter('Bot creato da Stiv');

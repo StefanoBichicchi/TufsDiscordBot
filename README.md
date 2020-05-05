@@ -61,3 +61,6 @@ Capisce anche la matematica (es. 2d30+2)
 
 ### &lutmeme
 Manda un meme di LUT
+
+### &dndmeme
+Manda un meme di Dungeons&Dragons
